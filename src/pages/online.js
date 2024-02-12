@@ -114,6 +114,26 @@ function Online() {
     navigate("/game/online");
   };
 
+  const handleStart = () => {
+    console.log("게임시작!");
+    /*전송 요청을 합니다.*/
+    axios({
+      method: "get",
+      url: URL_GET_GETALLROOM,
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => {
+        console.log(`응답: `, response);
+        let data = response.data;
+        setChatRoomData(data);
+      })
+      .catch((error) => {
+        console.error("Error during get request:", error);
+      });
+  };
+
   const updateCounter = (value) => {
     setCounter((prevCounter) => prevCounter + value);
   };
@@ -142,7 +162,11 @@ function Online() {
           type="text"
           placeholder="Enter Friend Code..."
         ></input>
-        <button id="button">Start Game!</button>
+        <Link to="/game/online/roomlist">
+          <button id="button" onClick={handleStart}>
+            Start Game!
+          </button>
+        </Link>
       </div>
     </div>
   );
