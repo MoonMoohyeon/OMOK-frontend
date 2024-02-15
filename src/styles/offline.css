@@ -1,3 +1,10 @@
 button {
   background-color: blue;
 }
+
+#timer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}

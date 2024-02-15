@@ -56,7 +56,6 @@ const GomokuBoard = () => {
       <div id="counter">
         <Countdown />
       </div>
-      <h3>Current Player:</h3>
       <div id="contain_board">
         <div className="board">{board}</div>
         {/* Adding a 320x320px rectangle */}
