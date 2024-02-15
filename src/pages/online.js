@@ -5,6 +5,7 @@ import axios from "axios";
 import {
   URL_GET_GETALLROOM,
   URL_POST_CREATEROOM,
+  URL_GET_FRIENDROOM,
 } from "../constants/UrlConstants";
 import { Route, Router, Routes, useNavigate, Link } from "react-router-dom";
 
@@ -124,6 +125,30 @@ function Online() {
 
   const handleStart = () => {
     console.log("게임시작!");
+    var inputValue = document.getElementById("enter-code").value;
+    console.log("Entered code:", inputValue);
+    /*전송 요청을 합니다.*/
+    axios({
+      method: "post",
+      url: URL_GET_FRIENDROOM + roomInfo.roomId,
+      // url: URL_GET_GETALLROOM,
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => {
+        console.log(`응답: `, response);
+        let data = response.data;
+        setChatRoomData(data);
+      })
+      .catch((error) => {
+        console.error("Error during get request:", error);
+      });
+    console.log("url = ", URL_GET_FRIENDROOM + roomInfo.roomId);
+  };
+
+  const searchRooms = () => {
+    console.log("방찾기!");
     /*전송 요청을 합니다.*/
     axios({
       method: "get",
@@ -171,22 +196,27 @@ function Online() {
           type="text"
           placeholder="Enter Friend Code..."
         ></input>
-        <Link to="/game/online/roomlist">
-          <button id="button" onClick={handleStart}>
+        <Link to="/game/online/play">
+          <button id="startbutton" onClick={handleStart}>
             Start Game!
           </button>
-          <div id="roomInfo">
-            <div>
-              {roomInfo && (
-                <div>
-                  <p>Room Name: {roomInfo.name}</p>
-                  <p>Room ID: {roomInfo.roomId}</p>
-                  {/* 기타 방 정보 출력 */}
-                </div>
-              )}
-            </div>
-          </div>
         </Link>
+        <Link to="/game/online/roomlist">
+          <button id="searchbutton" onClick={searchRooms}>
+            Search Rooms
+          </button>
+        </Link>
+        <div id="roomInfo">
+          <div>
+            {roomInfo && (
+              <div>
+                <p>Room Name: {roomInfo.name}</p>
+                <p>Room ID: {roomInfo.roomId}</p>
+                {/* 기타 방 정보 출력 */}
+              </div>
+            )}
+          </div>
+        </div>
       </div>
     </div>
   );
