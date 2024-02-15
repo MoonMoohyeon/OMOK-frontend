@@ -12,11 +12,14 @@ function Online() {
   const [counter, setCounter] = useState(100);
   const [content, setContent] = useState("");
   const [chatRoomData, setChatRoomData] = useState([]);
+  const [roomInfo, setRoomInfo] = useState(null); // 방 정보를 상태로 저장
   const client = useRef({});
 
   const messageField = useRef(null);
   const myChatRoom = null;
   const navigate = useNavigate();
+
+  let data;
 
   const connect = () => {
     client.current = new StompJs.Client({
@@ -106,7 +109,12 @@ function Online() {
     })
       .then((response) => {
         console.log(`응답: `, response);
-        let data = response.data;
+        data = response.data;
+        console.log("방 이름 : ", data.name);
+        console.log("룸코드 : ", data.roomId);
+
+        // 방 정보를 업데이트
+        setRoomInfo(data);
       })
       .catch((error) => {
         console.error("Error during post request:", error);
@@ -138,6 +146,7 @@ function Online() {
     setCounter((prevCounter) => prevCounter + value);
   };
 
+  console.log("데이터 = ", data);
   return (
     <div>
       <div id="betting">
@@ -166,6 +175,17 @@ function Online() {
           <button id="button" onClick={handleStart}>
             Start Game!
           </button>
+          <div id="roomInfo">
+            <div>
+              {roomInfo && (
+                <div>
+                  <p>Room Name: {roomInfo.name}</p>
+                  <p>Room ID: {roomInfo.roomId}</p>
+                  {/* 기타 방 정보 출력 */}
+                </div>
+              )}
+            </div>
+          </div>
         </Link>
       </div>
     </div>
