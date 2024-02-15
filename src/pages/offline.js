@@ -9,16 +9,13 @@ const ChessClock = () => {
   const isBlackTurn = useSelector((state) => state.turn.isBlack);
   const dispatch = useDispatch();
   const [timerInterval, setTimerInterval] = useState(null);
-  const [icon, setIcon] = useState("Black");
 
   useEffect(() => {
     const timer = setInterval(() => {
       if (isBlackTurn) {
         setWhiteTime((prevTime) => (prevTime > 0 ? prevTime - 1 : prevTime));
-        setIcon("Black");
       } else {
         setBlackTime((prevTime) => (prevTime > 0 ? prevTime - 1 : prevTime));
-        setIcon("White");
       }
       console.log("state: ", isBlackTurn);
     }, 1000);
@@ -37,11 +34,13 @@ const ChessClock = () => {
   return (
     <div>
       <div id="timer">
-        <div>Black: {formatTime(whiteTime)}</div>
-        <div>White: {formatTime(blackTime)}</div>
+        <div className={isBlackTurn ? "redText" : "normalText"}>
+          Black: {formatTime(whiteTime)}
+        </div>
+        <div className={isBlackTurn ? "normalText" : "redText"}>
+          White: {formatTime(blackTime)}
+        </div>
       </div>
-
-      <h2 id="currentPlayer">Current Player:{icon}</h2>
     </div>
   );
 };

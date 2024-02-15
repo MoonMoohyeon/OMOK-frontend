@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { useDispatch, connect, useSelector } from "react-redux";
 import "../styles/GomokuBoard.css";
 import Countdown from "../pages/offline";
+import blackIcon from "../styles/icon/board/black.png";
+import whiteIcon from "../styles/icon/board/white.png";
 
 const GomokuBoard = () => {
   const dispatch = useDispatch();
@@ -10,6 +12,7 @@ const GomokuBoard = () => {
   const [cellState, setCellState] = useState(
     Array.from({ length: 15 }, () => Array(15).fill(null))
   );
+  const [icon, setIcon] = useState(blackIcon);
 
   const handleClick = (i, j) => {
     console.log(`Cell clicked: (${i}, ${j})`);
@@ -19,8 +22,10 @@ const GomokuBoard = () => {
       newCellState[i][j] = turn;
       if (isBlackTurn === true) {
         dispatch({ type: "blackTurn" });
+        setIcon(whiteIcon);
       } else {
         dispatch({ type: "whiteTurn" });
+        setIcon(blackIcon);
       }
       setCellState(newCellState);
       setTurn(turn === true ? false : true);
@@ -56,6 +61,11 @@ const GomokuBoard = () => {
       <div id="counter">
         <Countdown />
       </div>
+      <h2 id="currentPlayer">
+        Current Player:
+        <img src={icon} alt="Icon" id="icon" />
+      </h2>
+
       <div id="contain_board">
         <div className="board">{board}</div>
         {/* Adding a 320x320px rectangle */}
