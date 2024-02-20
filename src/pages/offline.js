@@ -41,11 +41,6 @@ const ChessClock = () => {
           White: {formatTime(blackTime)}
         </div>
       </div>
-      <br />
-      <hr />
-      <div>White: {formatTime(whiteTime)}</div>
-      <div>Black: {formatTime(blackTime)}</div>
-      <button onClick={handleTurnChange}>Change Turn</button>
     </div>
   );
 };
