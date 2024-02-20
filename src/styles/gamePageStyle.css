@@ -1,5 +1,17 @@
 .body {
   margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* 수직 가운데 정렬 */
+  margin-top: 40%;
+  
+}
+
+ul {
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* 수직 가운데 정렬 */
 }
 
 li {
