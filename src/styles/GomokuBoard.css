@@ -103,9 +103,8 @@
   align-items: center;
 }
 
-#contaier{
+#contaier {
   display: flex;
-<<<<<<< HEAD
   justify-content: center;
 }
 
@@ -118,8 +117,3 @@
   justify-content: space-around;
   flex-direction: row;
 }
-=======
-  justify-content: space-around;
-  flex-direction: row;
-}
->>>>>>> parent of 817b43b (merge)
