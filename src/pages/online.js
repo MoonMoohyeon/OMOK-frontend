@@ -7,7 +7,6 @@ import {
   URL_POST_CREATEROOM,
   URL_GET_FRIENDROOM,
   URL_POST_ENTERROOM,
-  URL_GET_FRIENDROOM,
 } from "../constants/UrlConstants";
 import { Route, Router, Routes, useNavigate, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -262,8 +261,7 @@ function Online() {
         <input
           id="enter-code"
           type="text"
-          placeholder="Enter Friend Code..."
-        ></input>
+          placeholder="Enter Friend Code..."></input>
         <Link to="/game/online/play">
           <button id="startbutton" onClick={handleStart}>
             Start Game!
