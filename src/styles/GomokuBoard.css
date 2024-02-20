@@ -78,7 +78,7 @@
 }
 
 #contain_board {
-  margin-top: 10%;
+  margin-top: 20%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -101,11 +101,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 50px;
 }
 
-#currentPlayer {
+#contaier{
   display: flex;
+<<<<<<< HEAD
   justify-content: center;
 }
 
@@ -118,3 +118,8 @@
   justify-content: space-around;
   flex-direction: row;
 }
+=======
+  justify-content: space-around;
+  flex-direction: row;
+}
+>>>>>>> parent of 817b43b (merge)
