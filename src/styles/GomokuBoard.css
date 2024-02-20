@@ -112,3 +112,9 @@
 #icon {
   margin-left: 0px;
 }
+
+#contaier{
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+}

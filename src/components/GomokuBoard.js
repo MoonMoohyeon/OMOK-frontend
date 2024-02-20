@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
+import {useParams} from "react-router-dom";
 import { useDispatch, connect, useSelector } from "react-redux";
 import "../styles/GomokuBoard.css";
 import Countdown from "../pages/offline";
@@ -6,9 +7,11 @@ import blackIcon from "../styles/icon/board/black.png";
 import whiteIcon from "../styles/icon/board/white.png";
 
 const GomokuBoard = () => {
+  const {gameType} = useParams();
   const dispatch = useDispatch();
   const isBlackTurn = useSelector((state) => state.turn.isBlack);
   const [turn, setTurn] = useState(true); //turn 0 == black, 1 == white
+  const [userList, SetUserList] = useState([]);
   const [cellState, setCellState] = useState(
     Array.from({ length: 15 }, () => Array(15).fill(null))
   );
@@ -31,7 +34,6 @@ const GomokuBoard = () => {
       setTurn(turn === true ? false : true);
     }
   };
-
   const boardSize = 15;
   const board = [];
   for (let i = 0; i < boardSize; i++) {
@@ -44,7 +46,6 @@ const GomokuBoard = () => {
           ? "white"
           : ""
       }`;
-
       row.push(
         <div
           className={cellClassName}
@@ -55,8 +56,55 @@ const GomokuBoard = () => {
     }
     board.push(<div key={i}>{row}</div>);
   }
-
+  const playerStatus = (idx) => {
+    if(gameType === "offline"){
+      return userList[idx];
+    }else{
+      if(idx === 0){
+        return userList.length < 1 ? "유저1 미입장" :
+            userList[0];
+      }else if(idx === 1){
+        return userList.length < 2 ? "유저2 미입장" :
+              userList[1];
+      }
+    }
+  }
+  useEffect(()=>{
+        console.log(gameType);
+        if(gameType === "offline"){
+          let arr = ["유저 1", "유저 2"];
+          SetUserList(arr);
+        }
+  }
+  ,[]);
   return (
+      <div>
+        <div id = "contaier">
+          <div>
+            <br/>
+            <br/>
+            Player1
+            <br/>
+            {playerStatus(0)}
+          </div>
+          <div id="counter">
+            <Countdown/>
+          </div>
+          <div>
+            <br/>
+            <br/>
+            Player2
+            <br/>
+            {playerStatus(1)}
+          </div>
+        </div>
+        <h3>Current Player:</h3>
+        <div id="contain_board">
+          <div className="board">{board}</div>
+          {/* Adding a 320x320px rectangle */}
+          <div id="back_board"></div>
+        </div>
+      </div>
     <div>
       <div id="counter">
         <Countdown />
