@@ -261,10 +261,16 @@ function Online() {
         <input
           id="enter-code"
           type="text"
-          placeholder="Enter Friend Code..."></input>
+          placeholder="Enter Friend Code..."
+        ></input>
         <Link to="/game/online/play">
           <button id="startbutton" onClick={handleStart}>
             Start Game!
+          </button>
+        </Link>
+        <Link to="/game/online/roomlist">
+          <button id="searchbutton" onClick={searchRooms}>
+            Search Rooms
           </button>
         </Link>
         <div id="roomInfo">
